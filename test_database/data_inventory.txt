@@ -1,0 +1,25 @@
+# test inventory
+# every exhibition has own folder with the same name
+
+exhibition romans{
+    233(
+        de  roemischerhelm.mp3  roemischerhelm.tex
+        en  romanhelmet.mp3     romanhelmet.tex
+    )
+    10(
+        de  becher_rom.mp3      becher_rom.tex
+        en  cup_rome.mp3        cup_rome.tex
+    )
+}
+
+exhibition middle_ages{
+    15(
+        de  mittelalterlicher_schaedel.mp3  mittelalterlicher_schaedel.tex
+        en  skull_medieval.mp3              skull_medieval.tex
+    )
+    11(
+        de  morgenstern.mp3         morgenstern.tex
+        en  primitive_weapon.mp3    primitive_weapon.tex
+    )
+}
+
