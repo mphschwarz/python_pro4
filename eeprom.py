@@ -49,6 +49,11 @@ def read_inventory(device, sleeptime=0.01):
 def extract_likes(device, sleeptime=0.01):
     likes = []
     nr_likes = request_value(0, device)
-    for entry in range(3, 2 * nr_likes + 3):
-        likes.append(request_value(entry, device))
+    for entry in range(0, nr_likes):
+        likes.append(request_value(entry * 2 + 3, device))
+    for index, like in enumerate(likes):
+        if likes[index] == 2 or likes[index] == 0:
+            likes[index] = False
+        else:
+            likes[index] = True
     return likes
