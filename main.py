@@ -2,6 +2,7 @@ import serial
 import time
 import click
 import re
+import os
 
 import eeprom
 import database
@@ -28,10 +29,10 @@ def load_eeprom(inventory_file, preset_file, exhibitions, language):
     eeprom_conents = database.compile_eeprom(exhibitions, language, compiled_inventory, complete_inventory)
     device = eeprom.init_serial()
     eeprom.write_inventory(eeprom_conents[1], eeprom_conents[2], eeprom_conents[0], device)
+
+def make_package(inventory_file, preset_file, target_directory):
     pass
 
-
-def load_sd(inventory_file, preset_file, sd_path):
+def load_sd(package_path, sd_path):
     os.system('mount /dev/{} .'.format(sd_path))
 
-    pass
