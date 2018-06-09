@@ -16,7 +16,8 @@ def init_serial(dev_name=None, boud=115200, timeout=0.1):
 def pass_value(value, address, device, sleeptime=0.01):
     outstring = 'p{0:0>3}{1:0>3};'.format(address, value)
     device.write(bytes(outstring, 'utf-8'))
-    time.sleep(sleeptime)
+    while device.readline().decode('utf-8') != 'r\n':
+        pass
 
 
 def request_value(address, device, sleeptime=0.01):
@@ -25,7 +26,7 @@ def request_value(address, device, sleeptime=0.01):
     time.sleep(sleeptime)
     temp = device.readline().decode('utf-8')
     while temp == '' or temp == '\n':
-        time.sleep(sleeptime)
+        # time.sleep(sleeptime)
         temp = device.readline().decode('utf-8')
     return int(temp)
 

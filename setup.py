@@ -9,5 +9,7 @@ setup(
         scripts=['main.py',
                  'eeprom.py',
                  'database.py'],
-        entry_points={'console_scripts': ['maketicket=main:make_ticket']}
+        entry_points={'console_scripts': ['maketicket=main:make_ticket',
+                                          'loadsd=main:make_sd',
+                                          'makepackage=main:make_package']}
 )

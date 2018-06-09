@@ -1,10 +1,19 @@
 import unittest
+import os
 
 import main
 import database
 import eeprom
 
 class TestEEPROM(unittest.TestCase):
+    def test_load_sd(self):
+        source_directory = '/home/mschwarz/fhnw/pro4E/python_pro4/test_database/test_package'
+        source_list = os.listdir(source_directory)
+        target_directory = '/run/media/mschwarz/dojo_sd'
+        main.load_sd(source_directory, target_directory)
+        target_list = os.listdir(target_directory)
+        self.assertEqual(source_list, target_list)
+
     def test_main_eeprom(self):
         inventory_file = '../test_database/data_inventory.txt'
         preset_file = '../test_database/test_preset.txt'

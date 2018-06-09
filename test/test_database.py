@@ -5,6 +5,7 @@ import database
 
 class TestDatabase(unittest.TestCase):
     def test_regex(self):
+        """checks that inventory file is ingested correctly"""
         raw_exhibitions = database.read_database('../test_database/data_inventory.txt')
         exhibitions = [('romans',
                         '    233(\n        de  roemischerhelm.mp3  roemischerhelm.tex\n        en  romanhelmet.mp3     romanhelmet.tex\n    )\n    10(\n        de  becher_rom.mp3      becher_rom.tex\n        en  cup_rome.mp3        cup_rome.tex\n    )\n'),
@@ -22,6 +23,7 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(languages, database.language_regex.findall(objects[0][1]))
 
     def test_parse_database(self):
+        """checks that the correct dictionary tree is generated"""
         inventory = \
             {
                 'romans': {
@@ -50,6 +52,7 @@ class TestDatabase(unittest.TestCase):
                          database.parse_inventory(database.read_database('../test_database/data_inventory.txt')))
 
     def test_package_maker(self):
+        """checks if dictionary tree contains correct values form test inventory file"""
         compiled_inventory = ['233', '10']
         compiled_package = ['romanhelmet.mp3', 'cup_rome.mp3']
         self.assertEqual((compiled_inventory, compiled_package), database.compile_inventory_package(
@@ -83,6 +86,7 @@ class TestDatabase(unittest.TestCase):
                 database.parse_inventory(database.read_database('../test_database/data_inventory.txt'))))
 
     def test_compiled_eeprom(self):
+        """tests if eeprom ticket contains correct values"""
         total_inventory = database.parse_inventory(database.read_database('../test_database/data_inventory.txt'))
         language = 'de'
         payed_exhibitions = ['romans']
@@ -97,4 +101,5 @@ class TestDatabase(unittest.TestCase):
         total_inventory = database.parse_inventory(database.read_database('../test_database/data_inventory.txt'))
         preset = database.read_preset('../test_database/test_preset.txt')
         compiled_inventory, compiled_package = database.compile_inventory_package(preset[1], preset[0], total_inventory)
-        database.compile_package(compiled_package, '../test_database', '../test_database/test_package')
+        database.compile_package(compiled_package, '../test_database', '../test_database/test_package',
+                                 audio_format='.mp3')

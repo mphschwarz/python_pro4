@@ -11,12 +11,16 @@ preset_regex = re.compile(r'(\w+),?\s?')
 language_key = {'de': 0, 'en': 1}
 
 def read_database(db_file):
+    """opens inventory file
+    :returns inventory file as string"""
     file = open(db_file, 'r')
     out_string = file.read()
     file.close()
     return out_string
 
 def read_preset(preset_file):
+    """parses preset file
+    :returns languages, exhibitions"""
     file = open(preset_file, 'r')
     preset_string = file.readlines()
     file.close()
@@ -57,24 +61,18 @@ def compile_eeprom(exhibitions, language, compiled_invetory, inventory):
     for exhibition in exhibitions:
         for beacon_id in inventory[exhibition].keys():
             payed_objects.append(beacon_id)
-    compiled_eeprom = [len(compiled_invetory), language_key[language]]
     ids = []
     access = []
     for beacon_id in compiled_invetory:
-        # compiled_eeprom.append(int(beacon_id))
         ids.append(int(beacon_id))
         if beacon_id in payed_objects:
             access.append(2)
-            # compiled_eeprom.append(2)
         else:
             access.append(0)
-            # compiled_eeprom.append(0)
-    # return compiled_eeprom
     return language_key[language], ids, access
 
-def compile_package(compiled_package, audio_path, package_path, audio_format='.mp3'):
+def compile_package(compiled_package, audio_path, package_path, audio_format='.ad4'):
     """copies all audio files in compiled_package into a separate folder with wtv compliant names"""
     for index, audiofile in enumerate(compiled_package):
-        shutil.copy('{}/{}'.format(audio_path, audiofile),
-                    '{0:}/{1:0>4}{2:}'.format(package_path, index, audio_format))
+        shutil.copy('{}/{}'.format(audio_path, audiofile), '{0:}/{1:0>4}{2:}'.format(package_path, index, audio_format))
 
