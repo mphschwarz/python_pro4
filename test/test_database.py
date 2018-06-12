@@ -102,4 +102,4 @@ class TestDatabase(unittest.TestCase):
         preset = database.read_preset('../test_database/test_preset.txt')
         compiled_inventory, compiled_package = database.compile_inventory_package(preset[1], preset[0], total_inventory)
         database.compile_package(compiled_package, '../test_database', '../test_database/test_package',
-                                 audio_format='.mp3')
+                                 audio_format='.ad4')
